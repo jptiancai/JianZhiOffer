@@ -102,7 +102,7 @@ NumberFormat.getInstance().parse(params.get(key).toString().trim());
 
 
 
-- 天书项目，搜索instance得到
+- 项目中，搜索instance得到
 
 JVMMonitor ： public static final JVMMonitor instance = new JVMMonitor();
 
@@ -120,7 +120,7 @@ UseItemOperPool ： 道具使用支持类，单实例，用于为UseItemAction�
 
 MoveItemServicePool ： MoveItemService的对象池，用于根据源、目的包的id查询取得相应的MoveItemService，这些service对象都是公用的对象，单实例
 
-DBConnection : 定义DBConnection,源自天书mmo_db的同名类
+DBConnection : 定义DBConnection
 
 ShowOffPageNums
 
