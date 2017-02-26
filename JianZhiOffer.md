@@ -135,6 +135,12 @@ RobotManager : 机器人管理
 3. 实战
 
 
+枚举单例模式
+- [如何正确地写出单例模式](http://wuchong.me/blog/2014/08/28/how-to-correctly-write-singleton-pattern/)
+- [为什么java中用枚举实现单例模式会更好](https://my.oschina.net/zhoujy/blog/134958)
+- [JAVA 枚举单例模式](https://segmentfault.com/q/1010000000646806)
+
+
 
 
 
@@ -144,6 +150,20 @@ RobotManager : 机器人管理
 
 
 
+
+# 图
+
+## 无向图
+
+
+
+SLG游戏中解决最短路径的问题
+
+
+
+- [无向图的处理算法（三）](https://segmentfault.com/a/1190000002680208)
+- [无向图的最短路径求解算法之——Dijkstra算法(二)](http://sbp810050504.blog.51cto.com/2799422/1163565)
+- [国立台湾师范大学-演算法笔记](http://www.csie.ntnu.edu.tw/~u91029/Circuit.html)
 
 
 
