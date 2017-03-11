@@ -65,9 +65,7 @@
 
 ## 在线挑战[剑指offer](https://www.nowcoder.com/ta/coding-interviews?query=&asc=true&order=&page=1)
 
-
-
-
+## [大志非才不就，大才非学不成—我的博文资源汇总](http://www.cnblogs.com/edisonchou/p/3843287.html)
 
 ## 设计模式
 
@@ -159,8 +157,7 @@ RobotManager : 机器人管理
 
 SLG游戏中解决最短路径的问题
 
-
-
+- [数据结构基础温故-5.图（下）：最短路径](http://www.cnblogs.com/edisonchou/p/4691020.html)
 - [无向图的处理算法（三）](https://segmentfault.com/a/1190000002680208)
 - [无向图的最短路径求解算法之——Dijkstra算法(二)](http://sbp810050504.blog.51cto.com/2799422/1163565)
 - [国立台湾师范大学-演算法笔记](http://www.csie.ntnu.edu.tw/~u91029/Circuit.html)
