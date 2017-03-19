@@ -104,7 +104,7 @@ NumberFormat.getInstance().parse(params.get(key).toString().trim());
 
 JVMMonitor ： public static final JVMMonitor instance = new JVMMonitor();
 
-UdpLoggerClient ： 
+UdpLoggerClient ： log服务器客户端
 
 ServerStatusLog ：服务器状态日志
 
@@ -112,7 +112,7 @@ ArenaMemberDbManager ： private static ArenaMemberDbManager arenaMemberDbManage
 
 CurrencyProcessor ： 金钱处理器,单实例
 
-TimeDifferenceStr
+TimeDifferenceStr：时间区分字符串
 
 UseItemOperPool ： 道具使用支持类，单实例，用于为UseItemAction提供合适的UseItemOperation
 
@@ -120,9 +120,9 @@ MoveItemServicePool ： MoveItemService的对象池，用于根据源、目的�
 
 DBConnection : 定义DBConnection
 
-ShowOffPageNums
+ShowOffPageNums：显示页码
 
-PageNumForEach
+PageNumForEach：每页显示数目
 
 RobotManager : 机器人管理
 
