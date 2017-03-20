@@ -144,7 +144,62 @@ RobotManager : 机器人管理
 
 ## 数组
 
-- 二位数组中的查找
+- 二维数组中的查找
+
+
+
+
+当我们需要解决一个复杂的问题时，一个很有效的满发就是从一个具体的问题入手，通过分析简单的例子，试图寻找普遍的规律。比如该题目中给出的数组中查找数字7位例来一步步分析查找的过程。
+
+
+```java
+public class FindIt {
+    public static void main(String[] args) {
+        int [][] arrays={{1,2,8,9},{2,4,9,12},{4,7,10,13},{6,8,11,15}};
+        for (int[] i : arrays) {
+            System.out.print(i[0]);
+            System.out.print(" ");
+            System.out.print(i[1]);
+            System.out.print(" ");
+            System.out.print(i[2]);
+            System.out.print(" ");
+            System.out.print(i[3]);
+            System.out.println();
+        }
+        FindIt findIt=new FindIt();
+        System.out.println(findIt.find(arrays, 4, 4, 4));
+    }
+    boolean find(int [][] matrix,int rows,int columns,int number){
+        boolean found=false;
+        if (matrix!=null&&rows>0&&columns>0) {
+            int row=0;
+            int column=columns-1;
+            while(row<rows&&column>=0){
+                if (matrix[row][column]==number) {
+                    found=true;
+                    break;
+                }
+                else if(matrix[row][column]>number)
+                    --column;
+                else
+                    ++row;
+            }
+        }
+        return found;
+    }
+```
+```
+输出为
+
+1 2 8 9
+2 4 9 12
+4 7 10 13
+6 8 11 15
+true
+```
+
+
+
 
 
 
