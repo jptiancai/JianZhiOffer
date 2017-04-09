@@ -357,8 +357,8 @@ SLG游戏中解决最短路径的问题
 - [无向图的处理算法（三）](https://segmentfault.com/a/1190000002680208)
 - [无向图的最短路径求解算法之——Dijkstra算法(二)](http://sbp810050504.blog.51cto.com/2799422/1163565)
 - [国立台湾师范大学-演算法笔记](http://www.csie.ntnu.edu.tw/~u91029/Circuit.html)
-
-
+- [Java：寻找两点之间所有路径](http://mhqawjh.iteye.com/blog/414957)
+- [求无向无权图起点到终点的所有路径](http://blog.csdn.net/collonn/article/details/18222723)
 
 
 ## 算法和数据操作
