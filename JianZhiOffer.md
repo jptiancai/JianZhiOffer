@@ -381,6 +381,11 @@ SLG游戏中解决最短路径的问题
 
 java中的快速排序是什么？
 
+[Arrays.sort](http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/7u40-b43/java/util/Arrays.java#Arrays)
+
+- [学习笔记----快速排序的java实现及其改良](http://www.imooc.com/article/6009)
+- [快速排序](http://novoland.github.io/%E7%AE%97%E6%B3%95/2014/08/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html)
+
 
 
 
