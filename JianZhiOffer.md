@@ -378,6 +378,64 @@ SLG游戏中解决最短路径的问题
 - 如果面试题是要求在排序的数组（或者部分排序的数组）中查找一个数字或者统计某个数字出现的次数，我们都可以尝试用二分查找算法。
 - 哈希表和二叉排序树查找的重点在于考查对应的数据结构而不是算法。哈希表最主要的优点是我们利用它能够在O(1)时间查找某一元素，是效率最好的查找方式，但其缺点是需要额外的空间来实现哈希表；二叉排序树查找算法对应的数据结构是二叉搜索树
 - 排序比查找要复杂一些，面试官会经常要求应聘者比较插入排序、冒泡排序、归并排序、快速排序等不同算法的优劣。强烈建议应聘者在准备面试的时候，一定要对各种排序算法的特点烂熟于胸，能够从额外空间消耗、平均时间复杂度和最差时间复杂度等方面去比较他们的优缺点。需要特别强调的是，很多公司的面试官喜欢在面试环节中要求应聘者写出快速排序的代码。
+- 不同的排序算法使用的场合也不尽相同。快速排序虽然总体的平均效率是最好的，但也不是任何时候都是最优的算法。比如数组本身已经排好序了，而每一轮排序的时候都是以最后一个数字作为比较的标准，此时快速排序的效率只有O（n^2）。因此在这种场合快速排序就不是最优的算法。在面试的时候，如果面试官要求实现一个排序算法，那么应聘者一定要问清楚这个排序应用的环境是什么、有哪些约束条件。比如对什么数字进行排序，总共有多少个数字，数字的大小是在一个较小的范围内吗？是否可以使用辅助内存？
+
+
+
+```java
+package com.imop.lj.test.battle;
+
+public class UrlTest {  
+	
+	void sortAges(int ages[], int length) throws Exception{
+		if(ages == null || ages.length <= 0){
+			return;
+		}
+		
+		int oldestAge = 99;
+		int timeofAge[] = new int[oldestAge + 1];
+		
+		for (int i = 0; i <= oldestAge; i++) {
+			timeofAge[i] = 0;
+		}
+		
+		for (int i = 0; i < length; i++) {
+			int age = ages[i];
+			if(age < 0 || age > oldestAge){
+				throw new Exception("age out of age");
+			}
+			
+			++ timeofAge[age];
+		}
+		
+		int index = 0;
+		for (int i = 0; i <= oldestAge; i++) {
+			for (int j = 0; j < timeofAge[i]; j++) {
+				ages[index] = i;
+				++ index;
+			}
+		}
+		
+		for (int i = 0; i < ages.length; i++) {
+			System.out.print(ages[i]+",");
+		}
+		
+	}
+	
+	public static void main(String[] args) throws Exception {
+		UrlTest url = new UrlTest();
+		int ages[] = {2,5,7,8,9,57,34,23};
+		url.sortAges(ages, ages.length);
+		
+	}
+	
+   
+}  
+```
+
+
+
+
 
 java中的快速排序是什么？
 
