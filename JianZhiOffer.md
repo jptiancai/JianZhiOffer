@@ -63,6 +63,8 @@
 
 
 
+本书源代码： https://github.com/zhedahht/ChineseCodingInterviewAppendix
+
 ## 在线挑战[剑指offer](https://www.nowcoder.com/ta/coding-interviews?query=&asc=true&order=&page=1)
 
 ## [大志非才不就，大才非学不成—我的博文资源汇总](http://www.cnblogs.com/edisonchou/p/3843287.html)
@@ -235,6 +237,16 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 `进阶思路`：
 
 没有利用输入的旋转数组的特性，肯定达不到面试官的要求
+
+旋转之后的数组实际上可以划分为两个排序的子数组，而且前面的子数组的元素都大于或者等于后者子数组的元素。
+
+还注意到最小的元素刚好是这两个子数组的分界线。
+
+在排序的数组中我们可以用二分查找法实现O(logn)的查找。
+
+`代码`：
+
+
 
 
 
