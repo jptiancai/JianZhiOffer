@@ -246,7 +246,65 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 
 `代码`：
 
+```java
+package com.imop.lj.test.battle;
 
+public class UrlTest {
+
+	int minNumberInRotateArray(int[] rotateArray) {
+		int length = rotateArray.length;
+		if (length == 0)
+			return 0;
+
+		int left = 0;
+		int right = length - 1;
+		int mid = 0;
+
+		while (rotateArray[left] >= rotateArray[right]) {
+			if (right - left == 1) {
+				mid = right;
+				break;
+			}
+
+			mid = (left + right) / 2;
+			// 如果下标left、right、mid的元素均相等，用顺序查找
+			if (rotateArray[left] == rotateArray[right] && rotateArray[mid] == rotateArray[left])
+				return MinInOrder(rotateArray, left, right);
+
+			// 利用二分查找缩小范围
+			if (rotateArray[mid] >= rotateArray[left])
+				left = mid;
+			else if (rotateArray[mid] <= rotateArray[right])
+				right = mid;
+		}
+		return rotateArray[mid];
+	}
+
+	private int MinInOrder(int[] rotateArray, int left, int right) {
+		int result = rotateArray[left];
+		for (int i = left + 1; i <= right; i++) {
+			if (result > rotateArray[i])
+				result = rotateArray[i];
+		}
+		return result;
+	}
+
+	public static void main(String[] args) throws Exception {
+		UrlTest url = new UrlTest();
+		int rotateArray[] = { 3, 4, 5, 1, 2 };
+		System.out.println(url.minNumberInRotateArray(rotateArray));
+
+	}
+
+}
+```
+
+
+
+`考点`:
+
+- 能否看出是二分查找
+- 是否考虑到数组中有相同数字的特殊情况，该如何处理
 
 
 
@@ -490,6 +548,18 @@ java中的快速排序是什么？
 
 - [学习笔记----快速排序的java实现及其改良](http://www.imooc.com/article/6009)
 - [快速排序](http://novoland.github.io/%E7%AE%97%E6%B3%95/2014/08/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F.html)
+
+
+
+## 递归和循环
+
+
+
+### 斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。n<=39
+
+`常规思路`：
+
+
 
 
 
