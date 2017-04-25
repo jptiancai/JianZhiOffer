@@ -569,6 +569,76 @@ java中的快速排序是什么？
 
 事实上，用递归方法计算的时间复杂度是n的指数的方式递增的。
 
+```java
+package com.imop.lj.test.battle;
+
+public class UrlTest {
+
+	public long fibonacci(int n){
+		  if(n <= 0) return 0;
+		  if(n == 1) return 1;
+		  
+		  return fibonacci(n - 1) + fibonacci(n -2);
+	}
+	
+  //进阶解法，时间复杂度是O(n)
+	public long fibonacci2(int n){
+		  int[] result = {0 , 1};
+		  if(n < 2) return result[n];
+		  
+		  long fibNMinusOne = 1;
+		  long fibNMinusTwo = 0;
+		  long fibN = 0;
+		  for(int i = 2; i <= n; i++){
+		    fibN = fibNMinusOne + fibNMinusTwo;
+		    
+		    fibNMinusTwo = fibNMinusOne;
+		    fibNMinusOne = fibN;
+		  }
+		  
+		  return fibN;
+	}
+
+	public static void main(String[] args) throws Exception {
+		UrlTest url = new UrlTest();
+		long start = System.currentTimeMillis();
+		long fibN = url.fibonacci(45);
+		long end = System.currentTimeMillis();
+		System.out.println("fibonacci time cost:" + (end - start) + "\nvalue:" +fibN);
+		
+		long start1 = System.currentTimeMillis();
+		long fibN1 = url.fibonacci(45);
+		long end1 = System.currentTimeMillis();
+		System.out.println("\nfibonacci1 time cost:" + (end1 - start1) + "\nvalue:" +fibN1);
+
+	}
+
+}
+```
+
+
+
+`类似的斐波那契数列的应用`：
+
+一只青蛙一次可以跳上1级台阶，也可以跳上2级，求该青蛙跳上一个n级的台阶总共有多少中跳法。
+
+> 首先我们考虑最简单的情况。如果只有1级台阶，那显然只有一种跳法。如果有2级台阶，那就有两种跳的方法了：一种是分两次跳，每次跳1级；另外一种是一次跳2级。
+接着我们再来讨论一般情况。我们把n级台阶时的跳法看成是n的函数，记为f(n)。当n>2时，第一次跳的时候就有两种不同的选择：一是第一次只跳1级，此时跳法数目等于后面剩下的n-1级台阶的跳法数目，即为f(n-1);另外一种选择是第一次跳2级，此时跳法数目等于后面剩下的n-2级台阶的跳法数目，即为f(n-2)。因此n级台阶的不同跳法的总数f(n) = f(n-1) + f(n-2);这就是斐波那契数列
+
+
+`扩展考点`：
+
+在青蛙🐸台阶的问题中，如果把条件改成：一只青蛙一次可以跳上1级台阶，也可以跳上2级……，它也可以跳上n级，此时该青蛙跳上一个n级的台阶总共有多少种跳法？我们用数学归纳法可以证明f(n) = 2^(n-1)
+
+举例：
+1级有1，1种跳法
+2级有（1+1），2两种跳法
+3级有（1+1+1），（1+ 2）， （2+1），3 四种跳法
+
+
+
+
+
 
 
 
