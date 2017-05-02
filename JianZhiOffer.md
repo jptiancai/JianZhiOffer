@@ -647,6 +647,90 @@ public class UrlTest {
 位运算总共只有五种运算： 与、或、异或、左移和右移。
 
 
+左移运算符 m<< n 表示把m左移n位，左移n位的时候，最左边的n位将被丢弃，同时在最右边补上n个0
+例如
+
+`00001010 << 2 = 00101000`
+
+`10001010 << 3 = 01010000`
+
+右移运算符m >> n 表示把m右移n位，右移n位的时候，最右边的n位将被丢弃。但右移时处理最左边位的情况要稍微复杂一点。
+如果数字是一个无符号数值，则用0填补最左边的n位。
+如果数字是一个有符号数值，则用数字的符号位填补最左边的n位。也就是说如果数组原先是一个正数，则右移之后再最左边补n个0；
+如果数字原先是负数，则右移之后再最左边补n个1
+例如：
+
+`00001010 >> 2 = 00000010`
+
+`10001010 >> 3 = 11110001`
+
+
+### 输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。例如把9表示成二进制是1001， 有2位是1.因此如果输入9，该函数输出2
+
+`常规思路`：
+
+
+
+### 连续子数组的最大和
+例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
+
+```java
+
+package com.imop.lj.test.battle;
+
+public class UrlTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		UrlTest f = new UrlTest();
+		int[] arr = { 1, -2, 3, 10, -4, 7, 2, -5 };
+		System.out.println("MaxSum:" + f.findMaxSum(arr, 3));
+	}
+
+	public Integer findMaxSum(int[] arr, int m) {
+		int curSum = 0;
+		int maxSum = 0;
+		int len = arr.length;
+
+		if (arr == null || len == 0 || m > len) {
+			return null;
+		}
+
+		for (int i = 0; i < len; i++) {
+			curSum += arr[i];
+			if (curSum < 0) {
+				curSum = 0;
+			}
+			if (curSum > maxSum) {
+				maxSum = curSum;
+			}
+			
+			if( i % m == 1){
+				curSum = 0;
+			}
+		}
+
+		// all data are negative
+		if (maxSum == 0) {
+			for (int i = 0; i < len; i++) {
+				if (i == 0) {
+					maxSum = arr[i];
+				}
+				if (arr[i] > maxSum) {
+					maxSum = arr[i];
+				}
+			}
+		}
+		return maxSum;
+	}
+
+}
+
+```
+
+
 
 
 
