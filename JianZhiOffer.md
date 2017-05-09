@@ -669,6 +669,30 @@ public class UrlTest {
 
 `常规思路`：
 
+移动整数，判断整数的最右边数是不是1，是的话加1
+
+这样会带来两个问题：
+
+- 把整数右移一位和把整数除以2 那个高效？ 毫无疑问是前者
+- 如果输入的数是一个负数，比如0x80000000, 那最后就会变成0xFFFFFFFF(0xffffffff = 1111 1111 1111 1111 1111 1111 1111 1111)，最终陷入死循环  
+
+- [十大Intellij IDEA快捷键](http://blog.csdn.net/dc_726/article/details/42784275)
+
+```java
+int NumberOf1(int n)
+{
+	int count = 0;
+	while(n){
+		if(n & 1)
+			count ++;
+
+		n = n >> 1;
+	}
+
+	return count;
+}
+```
+
 
 
 ### 连续子数组的最大和
