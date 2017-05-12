@@ -740,6 +740,112 @@ int NumberOf1(int n){
 - 输入两个整数m和n，计算需要改变m的二进制表示中的多少位才能得到n。
 > 第一步求这两个数的异或，第二步统计异或结果中1的位数
 
+
+### 数值的整数次方
+
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+
+`基本思路`： 输入的数小于1， 或者是零，负数的时候怎么办？
+
+```java
+ double power(double base, int exponent){
+        double result = 1.0;
+        for (int i = 0; i <= exponent; i++) {
+            result *= base;
+        }
+
+        return result;
+    }
+```
+
+`进阶思路`:  进行了全面的考虑， 但是效率上有待提高
+
+```java
+
+/**
+ * Created by xiaohouzi on 17/5/9.
+ */
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        System.out.println(urlTest.power(2, 3));
+    }
+
+
+    boolean g_InvalidInput = false;
+
+    double power(double base, int exponent){
+
+        g_InvalidInput = false;
+
+        if (equal(base, 0.0) && exponent < 0){
+            g_InvalidInput = true;
+            return 0.0;
+        }
+
+        if(exponent < 0){
+            exponent = -exponent;
+        }
+
+        double result = PowerWithUnsignedExponent(base, exponent);
+        if(exponent < 0){
+            result = 1.0 / result;
+        }
+
+        return result;
+    }
+
+    private double PowerWithUnsignedExponent(double base, int exponent) {
+        double result = 1.0;
+        for (int i = 0; i <= exponent; i++) {
+            result *= base;
+        }
+
+        return result;
+    }
+
+    private boolean equal(double num1, double num2) {
+        if ((num1 - num2 > -0.0000001)
+                && (num1 - num2 < 0.0000001)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+}
+```
+
+`终极思路`: 全面又效率高的方法
+
+用右移运算符代替了除以2
+用位运算符代替了求余运算符来判断一个数是奇数还是偶数。
+
+位运算的效率比乘除法及求余运算的效率要高很多。
+
+```java
+
+ private double PowerWithUnsignedExponent(double base, int exponent) {
+        if (exponent == 0) return 1;
+        if (exponent == 1) return base;
+
+        double result = PowerWithUnsignedExponent(base, exponent >> 1);
+        result *= result;
+        if((exponent & 0x1) == 1){
+            result *= base;
+        }
+
+        return result;
+    }
+```
+
+
+### 打印1到最大的n位数
+
+
+
+
 ### 连续子数组的最大和
 例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
 
