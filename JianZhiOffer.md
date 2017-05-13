@@ -843,8 +843,22 @@ public class UrlTest {
 
 ### 打印1到最大的n位数
 
+`基本思路`: 如果输入的n很大的时候， 返回的结果用int或long都会溢出
 
+```java
+ void Print1ToMaxOfNDigits_1(int n){
+        int number = 1;
+        int i = 0;
+        while (i++ < n) number *= 10;
 
+        System.out.println("number" + number);
+
+        for ( i = 1; i < number; i++) {
+            System.out.println(i + "\t");
+        }
+    }
+
+```
 
 ### 连续子数组的最大和
 例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
