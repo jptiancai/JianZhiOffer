@@ -860,6 +860,121 @@ public class UrlTest {
 
 ```
 
+`进阶思路`:
+
+最常用也是最容易的方法是用字符串或者数组表达大数.
+
+```java
+
+   void Print1ToMaxOfNDigits_1(int n){
+        if (n <= 0){
+            return;
+        }
+
+        char[] number = new char[n + 1];
+        number[n] = '\0';
+
+        while (!increment(number)){
+            printNumber(number);
+        }
+
+    }
+
+    private void printNumber(char[] number) {
+        boolean isBeginning0 = true;
+        int nLength = number.length;
+
+        for (int i = 0; i < nLength; i++) {
+            if (isBeginning0 && number[i] != '0'){
+                isBeginning0 = false;
+            }
+
+            if (!isBeginning0){
+                System.out.print(number[i]);
+            }
+
+            System.out.print("\t");
+        }
+    }
+
+    private boolean increment(char[] number) {
+        boolean isOverflow = false;
+        int nTaskOver = 0;
+        int nLength = number.length;
+        for (int i = nLength - 1; i >= 0; i--) {
+            int nSum = number[i] - '0' + nTaskOver;
+            if (i == nLength - 1){
+                nSum ++;
+            }
+
+            if (nSum >= 10){
+                if (i == 0){
+                    isOverflow = true;
+                }else{
+                    nSum -= 10;
+                    nTaskOver = 1;
+                    number[i] = (char) ('0' + nSum);
+                }
+            }else{
+                number[i] = (char) ('0' + nSum);
+                break;
+            }
+        }
+
+        return isOverflow;
+    }
+
+```
+`终极思路`: n位所有十进制数其实就是n个从0到9的全排列
+
+```java
+   void Print1ToMaxOfNDigits_1(int n){
+        if (n <= 0){
+            return;
+        }
+
+        char[] number = new char[n + 1];
+        number[n] = '\0';
+
+        for (int i = 0; i < 10; i++) {
+            number[0] = (char) (i + '0');
+            print1ToMaxOfNDigitsRecursively(number, n, 0);
+        }
+
+    }
+
+    private void print1ToMaxOfNDigitsRecursively(char[] number, int length, int index) {
+        if (index == length - 1){
+            printNumber(number);
+            return;
+        }
+
+
+        for (int i = 0; i < 10; i++) {
+            number[index + 1] = (char) (i + '0');
+            print1ToMaxOfNDigitsRecursively(number, length, index + 1);
+        }
+    }
+
+```
+
+- 相关题目
+
+	- 实现任意两个整数的加法,由于没有限定两个数的大小范围,也要把它当做大数问题来处理.
+
+
+### 在O(1)时间删除链表节点
+
+```c
+Struct ListNode{
+	int m_nValue;
+	ListNode * m_pNext;
+};
+
+void DeleteNode(ListNode** pListHead, ListNode* pToBeDeleted)
+
+```
+
 ### 连续子数组的最大和
 例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
 
