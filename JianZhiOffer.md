@@ -975,6 +975,90 @@ void DeleteNode(ListNode** pListHead, ListNode* pToBeDeleted)
 
 ```
 
+常规思路是需要得到将被删除的结点的前面一个节点.所以需要从头结点开始顺序查找,但是这样很明显是)(n)
+
+我们可以很方便的得到要删除节点的下一个节点.
+如果我们把下一个节点的内容复制到需要删除的结点上覆盖原有的内容,
+再把下一个节点删除,
+就相当于把当前需要删除的结点删除.
+
+```java
+
+
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        ListNode l1 = urlTest.new ListNode(2);
+        ListNode node = urlTest.new ListNode(3);
+        ListNode node2 = urlTest.new ListNode(4);
+        l1.m_pNext = node;
+        node.m_pNext = node2;
+
+        System.out.println(l1.toString());
+
+        urlTest.DeleteNode(l1, node);
+
+        System.out.println(l1.toString());
+    }
+
+
+    public class ListNode {
+        int m_nValue;
+        ListNode m_pNext;
+
+        ListNode(int x) {
+            m_nValue = x;
+            m_pNext = null;
+        }
+
+        @Override
+        public String toString() {
+            return m_nValue + "->" + m_pNext;
+        }
+
+    }
+
+    void DeleteNode(ListNode pListHead, ListNode pToBeDeleted){
+        if(pListHead == null || pToBeDeleted == null){
+            return;
+        }
+
+        //要删除的结点不是尾结点
+        if (pToBeDeleted.m_pNext != null){
+            ListNode pNext = pToBeDeleted.m_pNext;
+            pToBeDeleted.m_nValue = pNext.m_nValue;
+            pToBeDeleted.m_pNext = pNext.m_pNext;
+
+            pNext = null;
+        }//链表只有一个节点,删除头结点(也是尾结点)
+        else if (pListHead == pToBeDeleted){
+            pToBeDeleted = null;
+            pListHead = null;
+        }//链表中有多个结点,删除尾结点
+        else{
+            ListNode pNode = pListHead;
+            while (pNode.m_pNext != pToBeDeleted){
+                pNode = pNode.m_pNext;
+            }
+
+            pNode.m_pNext = null;
+            pToBeDeleted = null;
+        }
+    }
+
+}
+
+```
+
+
+### 调整数组顺序使奇数位于偶数前面
+
+题目: 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
+
+
+
+
+
 ### 连续子数组的最大和
 例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
 
