@@ -995,7 +995,6 @@ public class UrlTest {
         node.m_pNext = node2;
 
         System.out.println(l1.toString());
-
         urlTest.DeleteNode(l1, node);
 
         System.out.println(l1.toString());
@@ -1063,6 +1062,37 @@ public class UrlTest {
 `进阶思路`:
 
 我们在扫描这个数组的时候,如果发现有偶数出现在奇数的前面,我们可以交换他们的顺序,交换之后就符合要求了
+
+
+
+```java
+    void Reorder(int pData, int length){
+        if (pData == null || length = 0){
+            return;
+        }
+        
+        int pBegin = pData;
+        int pEnd = pData + length - 1;
+        
+        while (pBegin < pEnd){
+            //向后移动pBegin, 直到它指向偶数
+            while (pBegin < pEnd && (pBegin & 0x01) != 0){
+                pBegin ++;
+            }
+            
+            //向前移动pEnd, 直到它指向奇数
+            while (pBegin < pEnd && (pEnd & 0x01) == 0){
+                pEnd --;
+            }
+            
+            if (pBegin < pEnd){
+                int temp = pBegin;
+                pBegin = pEnd;
+                pEnd = temp;
+            }
+        }
+    }
+```
 
 
 ### 连续子数组的最大和
