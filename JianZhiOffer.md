@@ -1094,6 +1094,69 @@ public class UrlTest {
     }
 ```
 
+`最终思路`:
+
+如果换成负数都在非负数的前面,该怎么做?只是要更换`(pBegin & 0x01) != 0`的比较吗?
+
+那要是换成被3整除的数都在不能被3整除的数的前面,该怎么做?
+
+```java
+
+/**
+ * Created by xiaohouzi on 17/5/9.
+ */
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+
+
+    }
+
+    void Reorder(int pData, int length){
+        if (pData == null || length = 0){
+            return;
+        }
+
+        int pBegin = pData;
+        int pEnd = pData + length - 1;
+
+        while (pBegin < pEnd){
+            //向后移动pBegin, 直到它指向偶数
+            while (pBegin < pEnd && isEven(pBegin)){
+                pBegin ++;
+            }
+
+            //向前移动pEnd, 直到它指向奇数
+            while (pBegin < pEnd && (pEnd & 0x01) == 0){
+                pEnd --;
+            }
+
+            if (pBegin < pEnd){
+                int temp = pBegin;
+                pBegin = pEnd;
+                pEnd = temp;
+            }
+        }
+    }
+
+    private boolean isEven(int n) {
+        return (n & 1) != 0;
+    }
+
+
+}
+```
+
+## 代码的鲁棒性(Robust)
+
+指程序能够判断输入是否合乎规范要求,并对不合乎要求的输入予以合理的处理.
+容错性是鲁棒性的一个重要体现.
+防御性编程是一种编程习惯,是指预见在什么地方可能会出现问题,并为这些可能出现的问题制定处理方式.比如试图打开文件时发现文件不存在,我们可以提示用户检查文件名和路径;
+当服务器连接不上时,我们可以试图连接备用服务器等.这样当异常情况发生时,软件的行为也尽在我们的掌握之中,而不至于出现不可预见的事情.
+
+与鲁棒性香瓜你的问题
+
+
 
 ### 连续子数组的最大和
 例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。
