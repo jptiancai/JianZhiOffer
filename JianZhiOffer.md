@@ -1,5 +1,12 @@
 [TOC]
 
+# 分析复杂问题的手段
+
+- 画图让抽象问题形象化
+
+- 举例让抽象问题具体化
+
+- 分解让复杂问题简单化
 
 
 # 准备阶段
@@ -1177,9 +1184,81 @@ public class UrlTest {
 
 但是面试官希望解法只需要遍历链表一次
 
+注意异常情况的判断:
+
+输入的pListHead位空指针
+输入的pListHead为头结点的链表的结点总数少于k.
+输入的参数k为0.
+
+
 `终极思路`:
 
-
+```java
+/**
+ * Created by xiaohouzi on 17/5/9.
+ */
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        ListNode l1 = urlTest.new ListNode(2);
+        ListNode node = urlTest.new ListNode(3);
+        ListNode node2 = urlTest.new ListNode(4);
+        l1.m_pNext = node;
+        node.m_pNext = node2;
+
+        System.out.println(l1.toString());
+
+        System.out.println(urlTest.findKthToTail(l1, 2));
+
+
+    }
+
+    public class ListNode {
+        int m_nValue;
+        ListNode m_pNext;
+
+        ListNode(int x) {
+            m_nValue = x;
+            m_pNext = null;
+        }
+
+        @Override
+        public String toString() {
+            return m_nValue + "->" + m_pNext;
+        }
+
+    }
+
+    ListNode findKthToTail(ListNode pListHead, int k){
+        if (pListHead == null || k === 0){
+            retun null;
+        }
+        
+        ListNode pAhead = pListHead;
+        ListNode pBehind = null;
+
+        for (int i = 0; i < k -1; i++) {
+            if (pAhead.m_pNext != null){
+                pAhead = pAhead.m_pNext;
+            }else{
+                return null;
+            }
+            
+        }
+
+        pBehind = pListHead;
+
+        while (pAhead.m_pNext != null){
+            pAhead = pAhead.m_pNext;
+            pBehind = pBehind.m_pNext;
+        }
+
+        return pBehind;
+    }
+
+}
+
+```
 
 
 ### 连续子数组的最大和
@@ -1241,6 +1320,7 @@ public class UrlTest {
 
 ```
 
+
 `扩展题目`
 
 - 求连续m个数的子数组最大和
