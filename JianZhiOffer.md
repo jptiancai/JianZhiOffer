@@ -1193,10 +1193,8 @@ public class UrlTest {
 
 `终极思路`:
 
-```java
-/**
- * Created by xiaohouzi on 17/5/9.
- */
+```java
+
 public class UrlTest {
     public static void main(String[] args) {
         UrlTest urlTest = new UrlTest();
@@ -1257,12 +1255,12 @@ public class UrlTest {
     }
 
 }
+
 ```
 
-----------
 
 
-
+----------------
 
 
 举一反三:
@@ -1276,6 +1274,13 @@ public class UrlTest {
 回老家休息中......
 休息的第二天......
 回北京上班.......
+
+
+### 反转链表
+
+定义一个函数,输入一个链表的头结点,反转该链表并输出反转链表的头结点.
+
+
 
 
 
