@@ -1278,8 +1278,81 @@ public class UrlTest {
 
 ### 反转链表
 
-定义一个函数,输入一个链表的头结点,反转该链表并输出反转链表的头结点.
+定义一个函数,输入一个链表的头结点,反转该链表并输出反转链表的头结点
 
+- 论思考的重要性
+
+解决与链表相关的问题总是有大量的指针操作,而指针操作的代码总是容易出错的.很多面试官喜欢出链表相关的问题,就是想通过指针操作来考察应聘者的编程功底.为了避免出错,我们最好先进行全面的分析,在实际软件开发周期中,设计的时间通常不会比编码的时间短.在面试的时候我们不要急于动手写代码,而是一开始仔细分析和设计,这将给面试官留下很好的印象.与其很快写出一段漏洞百出的代码,倒不如仔细分析再写出鲁棒的代码.
+
+```java
+import java.util.List;
+
+/**
+ * Created by xiaohouzi on 17/5/9.
+ */
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        ListNode l1 = urlTest.new ListNode(2);
+        ListNode node = urlTest.new ListNode(3);
+        ListNode node2 = urlTest.new ListNode(4);
+        l1.m_pNext = node;
+        node.m_pNext = node2;
+
+        System.out.println(l1.toString());
+
+        System.out.println(urlTest.reverseList(l1));
+
+
+    }
+
+    public class ListNode {
+        int m_nValue;
+        ListNode m_pNext;
+
+        ListNode(int x) {
+            m_nValue = x;
+            m_pNext = null;
+        }
+
+        @Override
+        public String toString() {
+            return m_nValue + "->" + m_pNext;
+        }
+
+    }
+
+    ListNode reverseList(ListNode pHead){
+        //反转后链表的头结点
+        ListNode pReversedHead = null;
+        //当前遍历到的结点
+        ListNode pNode = pHead;
+        //它的前节点
+        ListNode pPrev = null;
+        while (pNode != null){
+            //后一个节点
+            ListNode pNext = pNode.m_pNext;
+
+
+            //反转后链表的头结点是原始链表的尾结点
+            if(pNext == null){
+                pReversedHead = pNode;
+            }
+
+
+            //下一个节点替换成前节点
+            pNode.m_pNext = pPrev;
+            
+            pPrev = pNode;
+            pNode = pNext;
+        }
+
+        return pReversedHead;
+    }
+
+}
+
+```
 
 
 
