@@ -1367,6 +1367,88 @@ public class UrlTest {
  - 输入的链表有多个结点
 
 
+### 合并两个排序的链表
+输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+
+如: 
+链表1: 1->3->5->7
+链表2: 2->4->6->8
+合并后的链表:
+1->2->3->4->5->6->7->8
+
+
+-------------
+
+```java
+import com.sun.scenario.effect.Merge;
+
+import java.util.List;
+
+/**
+ * Created by xiaohouzi on 17/5/9.
+ */
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        ListNode l1 = urlTest.new ListNode(1);
+        ListNode node3 = urlTest.new ListNode(3);
+        ListNode node5 = urlTest.new ListNode(5);
+        l1.m_pNext = node3;
+        node3.m_pNext = node5;
+
+        ListNode l2 = urlTest.new ListNode(2);
+        ListNode node4 = urlTest.new ListNode(4);
+        ListNode node6 = urlTest.new ListNode(6);
+        l2.m_pNext = node4;
+        node4.m_pNext = node6;
+
+        System.out.println(l1.toString());
+        System.out.println(l2.toString());
+
+        System.out.println(urlTest.merge(l1, l2));
+
+
+    }
+
+    public class ListNode {
+        int m_nValue;
+        ListNode m_pNext;
+
+        ListNode(int x) {
+            m_nValue = x;
+            m_pNext = null;
+        }
+
+        @Override
+        public String toString() {
+            return m_nValue + "->" + m_pNext;
+        }
+
+    }
+
+    ListNode merge(ListNode pHead1, ListNode pHead2){
+        //考虑两个链表中有任意一个为空链表的情况
+        if (pHead1 == null) return pHead2;
+        else if (pHead2 == null) return pHead1;
+
+        ListNode pMergedHead = null;
+
+        if (pHead1.m_nValue < pHead2.m_nValue){
+            pMergedHead = pHead1;
+            pMergedHead.m_pNext = merge(pHead1.m_pNext, pHead2);
+        }else{
+            pMergedHead = pHead2;
+            pMergedHead.m_pNext = merge(pHead1, pHead2.m_pNext);
+        }
+
+        return pMergedHead;
+
+    }
+
+}
+
+```
+
 
 
 
