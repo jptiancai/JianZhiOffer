@@ -1449,7 +1449,20 @@ public class UrlTest {
 
 ```
 
+### 树的子结构
 
+输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+
+
+二叉树结点的定义如下:
+```java
+private class binaryTreeNode{
+    int m_nvalue;
+    binaryTreeNode m_pLeft;
+    binaryTreeNode m_pRight;
+}
+
+```
 
 
 
