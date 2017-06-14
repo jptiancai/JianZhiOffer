@@ -1464,6 +1464,117 @@ private class binaryTreeNode{
 
 ```
 
+`基础思路`:
+
+用递归的思路,比较两棵树的头结点, 左结点和右结点
+
+
+```java
+import com.sun.scenario.effect.Merge;
+
+import java.util.List;
+
+/**
+ * Created by xiaohouzi on 17/5/9.
+ */
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        
+        ////////第一棵数////////
+        BinaryTreeNode b1 = urlTest.new BinaryTreeNode(8);
+        BinaryTreeNode b1_l = urlTest.new BinaryTreeNode(8);
+        BinaryTreeNode b1_r = urlTest.new BinaryTreeNode(7);
+
+        BinaryTreeNode b2_l = urlTest.new BinaryTreeNode(9);
+        BinaryTreeNode b2_r = urlTest.new BinaryTreeNode(2);
+
+        BinaryTreeNode b3_l = urlTest.new BinaryTreeNode(4);
+        BinaryTreeNode b3_r = urlTest.new BinaryTreeNode(7);
+        b1.m_pLeft = b1_l;
+        b1.m_pRight = b1_r;
+
+        b1_l.m_pLeft = b2_l;
+        b1_l.m_pRight = b2_r;
+
+
+        b2_r.m_pLeft = b3_l;
+        b2_r.m_pRight = b3_r;
+
+
+        System.out.println(b1.toString());
+
+
+        //////////第二棵树//////////
+
+        BinaryTreeNode c1 = urlTest.new BinaryTreeNode(8);
+        BinaryTreeNode c2_l = urlTest.new BinaryTreeNode(9);
+        BinaryTreeNode c2_r = urlTest.new BinaryTreeNode(2);
+
+        c1.m_pLeft = c2_l;
+        c1.m_pRight = c2_r;
+
+        System.out.println(c1.toString());
+
+
+        System.out.println(urlTest.hasSubTree(b1, c1));
+
+    }
+
+    private class BinaryTreeNode{
+        int m_nvalue;
+        BinaryTreeNode m_pLeft;
+        BinaryTreeNode m_pRight;
+
+        public BinaryTreeNode(int m_nvalue) {
+            this.m_nvalue = m_nvalue;
+        }
+
+        @Override
+        public String toString() {
+            return "BinaryTreeNode{" +
+                    "m_nvalue=" + m_nvalue +
+                    ", m_pLeft=" + m_pLeft +
+                    ", m_pRight=" + m_pRight +
+                    '}';
+        }
+    }
+
+
+
+
+    boolean hasSubTree(BinaryTreeNode pRoot1, BinaryTreeNode pRoot2){
+        boolean result = false;
+
+        if (pRoot1 != null && pRoot2 != null){
+            if (pRoot1.m_nvalue == pRoot2.m_nvalue) result = doesTree1HavaTree2(pRoot1, pRoot2);
+            if (!result) result = hasSubTree(pRoot1.m_pLeft, pRoot2);
+            if (!result) result = hasSubTree(pRoot1.m_pRight, pRoot2);
+        }
+
+        return result;
+    }
+
+    private boolean doesTree1HavaTree2(BinaryTreeNode pRoot1, BinaryTreeNode pRoot2) {
+        if (pRoot2 == null) return true;
+        if (pRoot1 == null) return false;
+
+        if (pRoot1.m_nvalue != pRoot2.m_nvalue) return false;
+
+        return doesTree1HavaTree2(pRoot1.m_pLeft, pRoot2.m_pLeft)
+                && doesTree1HavaTree2(pRoot1.m_pRight, pRoot2.m_pRight);
+    }
+
+
+}
+```
+
+`测试用例`:
+
+树A和树B 的头结点有一个或者两个都是空指针,在树A和树B种所有结点都只有左子节点或者右子节点
+
+二叉树的所有结点都没有左子树或者右子树.
+
 
 
 
