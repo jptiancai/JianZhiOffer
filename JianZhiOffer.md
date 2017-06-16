@@ -48,6 +48,7 @@
         - [4.13.3. 合并两个排序的链表](#4133-合并两个排序的链表)
         - [4.13.4. 树的子结构](#4134-树的子结构)
         - [4.13.5. 操作给定的二叉树，将其变换为源二叉树的镜像。](#4135-操作给定的二叉树将其变换为源二叉树的镜像)
+        - [顺时针打印矩阵](#顺时针打印矩阵)
         - [4.13.6. 连续子数组的最大和](#4136-连续子数组的最大和)
 
 <!-- /TOC -->
@@ -1644,6 +1645,110 @@ public class UrlTest {
     	 / \  / \
     	11 9 7  5
 ```
+
+```java
+
+import com.sun.scenario.effect.Merge;
+
+import java.util.List;
+
+/**
+ * Created by xiaohouzi on 17/5/9.
+ */
+public class UrlTest {
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+
+        ////////第一棵数////////
+        BinaryTreeNode b1 = urlTest.new BinaryTreeNode(8);
+        BinaryTreeNode b1_l = urlTest.new BinaryTreeNode(8);
+        BinaryTreeNode b1_r = urlTest.new BinaryTreeNode(7);
+
+        BinaryTreeNode b2_l = urlTest.new BinaryTreeNode(9);
+        BinaryTreeNode b2_r = urlTest.new BinaryTreeNode(2);
+
+        BinaryTreeNode b3_l = urlTest.new BinaryTreeNode(4);
+        BinaryTreeNode b3_r = urlTest.new BinaryTreeNode(7);
+        b1.m_pLeft = b1_l;
+        b1.m_pRight = b1_r;
+
+        b1_l.m_pLeft = b2_l;
+        b1_l.m_pRight = b2_r;
+
+
+        b2_r.m_pLeft = b3_l;
+        b2_r.m_pRight = b3_r;
+
+
+        System.out.println(b1.toString());
+
+        urlTest.mirrorRecursively(b1);
+
+        System.out.println(b1.toString());
+
+    }
+
+    private class BinaryTreeNode{
+        int m_nvalue;
+        BinaryTreeNode m_pLeft;
+        BinaryTreeNode m_pRight;
+
+        public BinaryTreeNode(int m_nvalue) {
+            this.m_nvalue = m_nvalue;
+        }
+
+        @Override
+        public String toString() {
+            return "BinaryTreeNode{" +
+                    "m_nvalue=" + m_nvalue +
+                    ", m_pLeft=" + m_pLeft +
+                    ", m_pRight=" + m_pRight +
+                    '}';
+        }
+    }
+
+
+
+    void mirrorRecursively(BinaryTreeNode pNode){
+        if (pNode == null) return;
+        if (pNode.m_pLeft == null && pNode.m_pRight == null){
+            return;
+        }
+
+
+        //两两交换
+        BinaryTreeNode pTemp = pNode.m_pLeft;
+        pNode.m_pLeft = pNode.m_pRight;
+        pNode.m_pRight = pTemp;
+
+        
+        if (pNode.m_pLeft != null){
+            mirrorRecursively(pNode.m_pLeft);
+        }
+
+        if (pNode.m_pRight != null){
+            mirrorRecursively(pNode.m_pRight);
+        }
+    }
+
+
+}
+
+```
+
+### 顺时针打印矩阵
+
+输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，
+
+```
+如果输入如下矩阵： 
+1 2 3 4 
+5 6 7 8
+9 10 11 12 
+13 14 15 16 
+则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
+```
+
 
 
 
