@@ -1749,6 +1749,89 @@ public class UrlTest {
 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
 ```
 
+```java
+
+package com.imop.lj.test.battle;
+
+
+
+/**
+ * Created by xiaohouzi on 17/6/30.
+ */
+public class UrlTest {
+
+
+    void printMatrixClockwisely(int[][] numbers, int columns, int rows){
+        if (numbers == null || columns <=0 || rows <= 0){
+            return;
+        }
+
+        int start = 0;
+        while (columns > start * 2 && rows > start * 2){
+            printMatrixInCircle(numbers, columns, rows, start);
+            ++ start;
+        }
+    }
+
+    private void printMatrixInCircle(int[][] numbers, int columns, int rows, int start) {
+        int endX = columns - 1 - start;
+        int endY = rows -1 - start;
+
+        //从左到右打印一行
+        for (int i = start; i <= endX; i++) {
+            int number = numbers[start][i];
+            printNumber(number);
+
+        }
+
+        //从上到下打印一列
+        if (start < endY){
+            for (int i = start + 1; i <= endY; i++) {
+                int number = numbers[i][endX];
+                printNumber(number);
+
+            }
+        }
+
+        //从右到左打印一行
+        if (start < endX && start < endY){
+            for (int i = endX - 1; i >= start; i--) {
+                int number = numbers[endY][i];
+                printNumber(number);
+            }
+        }
+
+
+        //从下到上打印一列
+        if (start < endX && start < endY - 1){
+            for (int i = endY - 1; i >= start + 1; i--) {
+                int number = numbers[i][start];
+                printNumber(number);
+            }
+        }
+
+
+
+    }
+
+    private void printNumber(int number) {
+        System.out.print(number + " ");
+    }
+
+
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        int[][] numbers = {
+                {1,2,3,4},
+                {5,6,7,8},
+                {9,10,11,12},
+                {13,14,15,16}
+        };
+        urlTest.printMatrixClockwisely(numbers, 4, 4);
+    }
+}
+
+```
 
 
 
