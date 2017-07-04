@@ -50,6 +50,7 @@
         - [4.13.5. 操作给定的二叉树，将其变换为源二叉树的镜像。](#4135-操作给定的二叉树将其变换为源二叉树的镜像)
         - [4.13.6. 顺时针打印矩阵](#4136-顺时针打印矩阵)
         - [4.13.7. 包含min函数的栈](#4137-包含min函数的栈)
+        - [栈的压入,弹出序列](#栈的压入弹出序列)
         - [4.13.8. 连续子数组的最大和](#4138-连续子数组的最大和)
 
 <!-- /TOC -->
@@ -1857,6 +1858,9 @@ public class UrlTest {
 
 - `思路`:
 
+数据栈和辅助栈,两个栈完成push,pop,min函数操作
+在压入这个最小元素之前, 我们要把次小元素(辅助栈)保存起来
+
 | 步骤        | 操作           | 数据栈  |辅助栈|最小值
 | ------------- |:-------------:| -----:|-----:|-----:|
 | 1      | 压入3 | 3 |3 |3
@@ -1868,9 +1872,133 @@ public class UrlTest {
 | 7      | 压入0      |   3,4,0|3,3,0 |0 |
 
 
+```java
+
+package com.imop.lj.test.battle;
+
+import java.util.Stack;
+
+/**
+ * Created by xiaohouzi on 17/6/30.
+ */
+public class UrlTest {
 
 
+    Stack<Integer> m_data = new Stack<Integer>();
+    Stack<Integer> m_min = new Stack<Integer>();
 
+    public static void main(String[] args) {
+        UrlTest urlTest = new UrlTest();
+        urlTest.stackWithMinPush(3);
+        printStackInfo(urlTest);
+        urlTest.stackWithMinPush(4);
+        printStackInfo(urlTest);
+        urlTest.stackWithMinPush(2);
+        printStackInfo(urlTest);
+        urlTest.stackWithMinPush(1);
+        printStackInfo(urlTest);
+        urlTest.stackWithMinPop();
+        printStackInfo(urlTest);
+        urlTest.stackWithMinPop();
+        printStackInfo(urlTest);
+        urlTest.stackWithMinPush(0);
+        printStackInfo(urlTest);
+
+
+        
+
+    }
+
+	private static void printStackInfo(UrlTest urlTest) {
+		System.out.println(urlTest.m_data + "\t\t" + urlTest.m_min);
+	}
+
+    void stackWithMinPush(int value){
+        m_data.push(value);
+
+        if (m_min.size() == 0 || value < m_min.firstElement()){
+            m_min.push(value);
+        }else {
+            m_min.push(m_min.firstElement());
+        }
+    }
+
+    void stackWithMinPop(){
+        assert (m_data.size() > 0 && m_min.size() > 0);
+
+        m_data.pop();
+        m_min.pop();
+    }
+
+    int stackWithMinMin(){
+        assert (m_data.size() > 0 && m_min.size() > 0);
+        return m_min.firstElement();
+    }
+
+}
+
+```
+
+
+- 测试用例
+
+  - 新压入栈的数字比之前的最小值大
+  - 新压入栈的数字比之前的最小值小
+  - 弹出栈的数字不是最小的元素
+  - 弹出栈是的数字是最小的元素
+
+### 栈的压入,弹出序列
+
+输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5,3,2,1是该压栈序列对应的一个弹出序列，但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
+
+- 思路
+
+解决这个问题很直观的想法就是建立一个辅助栈, 把输入的第一个序列中的数字依次压入该辅助栈,并按照第二个序列的顺序依次从该栈中弹出数字
+
+`压入栈序列为1,2,3,4,5 弹出序列4,5,3,2,1`
+
+| 步骤        | 操作           | 栈  |弹出数字
+| ------------- |:-------------:| -----:|-----:|
+| 1      | 压入1 | 1 |
+| 2      | 压入2      |   1,2|
+| 3      | 压入3      |   1,2,3|
+| 4      | 压入4      |   1,2,3,4|
+| 5      | 弹出      |   1,2,3|4
+| 6      | 压入5      |   1,2,3,5|
+| 7      | 弹出      |   1,2,3|5
+| 8      | 弹出      |   1,2,|3
+| 9      | 弹出      |   1|2
+| 10      | 弹出      |   |1
+
+
+`压入栈序列为1,2,3,4,5 弹出序列4,3,5,1,2`
+
+| 步骤        | 操作           | 栈  |弹出数字
+| ------------- |:-------------:| -----:|-----:|
+| 1      | 压入1 | 1 |
+| 2      | 压入2      |   1,2|
+| 3      | 压入3      |   1,2,3|
+| 4      | 压入4      |   1,2,3,4|
+| 5      | 弹出      |   1,2,3|4
+| 6      | 弹出      |   1,2|3
+| 7      | 压入5      |   1,2,5|
+| 8      | 弹出      |   1,2|5
+| 下一个弹出的是1, 但1不在栈顶,压栈序列的数字都已入栈.操作无法继续|
+
+
+总结上述入栈,出栈的过程,我们可以找到判断一个序列是不是栈的弹出序列的规律: 如果下一个弹出的数字刚好是栈顶数字,那么直接弹出.如果下一个弹出的数字不在栈顶,我们把压栈序列中还没有入栈的数字压入辅助栈,直到把下一个需要弹出的数字压入栈顶为止.如果所有的数字豆芽如栈了仍然没有找到下一个弹出的数字,那么该序列不可能是一个弹出序列.
+
+
+```java
+
+
+```
+
+- 测试用例
+
+  - 功能测试(输入的两个数组含有多个数字或者只有1个数字, 第二个数组或者不是第一个数组表示的压入序列对应的栈的弹出序列)
+  - 特殊输入测试(输入两个NULL指针)
+  
 
 
 ### 4.13.8. 连续子数组的最大和
