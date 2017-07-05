@@ -51,6 +51,7 @@
         - [4.13.6. 顺时针打印矩阵](#4136-顺时针打印矩阵)
         - [4.13.7. 包含min函数的栈](#4137-包含min函数的栈)
         - [栈的压入,弹出序列](#栈的压入弹出序列)
+        - [从上到下打印二叉树](#从上到下打印二叉树)
         - [4.13.8. 连续子数组的最大和](#4138-连续子数组的最大和)
 
 <!-- /TOC -->
@@ -1990,6 +1991,68 @@ public class UrlTest {
 
 
 ```java
+package com.imop.lj.test.battle;
+
+import java.util.Arrays;
+import java.util.Stack;
+
+/**
+ * Created by xiaohouzi on 17/6/30.
+ */
+public class UrlTest {
+	
+	public static void main(String[] args) {
+		UrlTest urlTest = new UrlTest();
+		
+		int[] pushA = {1,2,3,4,5};
+		int[] popA_right = {4,5,3,2,1};
+		int[] popA_wrong = {4,3,5,1,2};
+		printStackData(urlTest, pushA, popA_right);
+		printStackData(urlTest, pushA, popA_wrong);
+	}
+
+	private static void printStackData(UrlTest urlTest, int[] pushA, int[] popA_right) {
+		System.out.println("pushA : " + Arrays.toString(pushA) + "popA_right : " + Arrays.toString(popA_right)+" " +urlTest.IsPopOrder(pushA, popA_right));
+	}
+	
+	 public boolean IsPopOrder(int [] pushA,int [] popA) {
+
+	        if(pushA == null || popA == null){
+	            return false;
+	        }
+
+	        int m = pushA.length;
+	        int n = popA.length;
+
+	        if(m == 0 || n == 0){
+	            return false;
+	        }
+	        Stack<Integer> s = new Stack<Integer>();
+
+	        int start = 0;
+	        for(int i = 0; i < n; i++){
+
+
+	            while(s.empty() || s.peek() != popA[i]){
+
+	                if(start >= m){
+	                    return false;
+	                }
+	                s.push(pushA[start++]);
+	            }
+
+	            if(s.peek() != popA[i]){
+	                return false;
+	            }
+
+	            s.pop();
+	        }
+
+	        return true;
+
+	    }
+
+}
 
 
 ```
@@ -1999,6 +2062,11 @@ public class UrlTest {
   - 功能测试(输入的两个数组含有多个数字或者只有1个数字, 第二个数组或者不是第一个数组表示的压入序列对应的栈的弹出序列)
   - 特殊输入测试(输入两个NULL指针)
   
+
+### 从上到下打印二叉树
+
+从上往下打印出二叉树的每个节点，同层节点从左至右打印。
+
 
 
 ### 4.13.8. 连续子数组的最大和
