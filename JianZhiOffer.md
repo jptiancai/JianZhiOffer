@@ -2081,6 +2081,102 @@ public class UrlTest {
 | 7      | 打印结点11      |  |
 
 
+```java
+package com.imop.lj.test.battle;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+/**
+ * Created by xiaohouzi on 17/6/30.
+ */
+public class UrlTest {
+
+	public static void main(String[] args) {
+		UrlTest urlTest = new UrlTest();
+
+		TreeNode node1 = urlTest.new TreeNode(8);
+		TreeNode node1Left = urlTest.new TreeNode(6);
+		TreeNode node1Right = urlTest.new TreeNode(10);
+		node1.left = node1Left;
+		node1.right = node1Right;
+		TreeNode node2Left = urlTest.new TreeNode(5);
+		TreeNode node2Right = urlTest.new TreeNode(7);
+		node1Left.left = node2Left;
+		node1Left.right = node2Right;
+		
+		TreeNode node3Left = urlTest.new TreeNode(9);
+		TreeNode node3Right = urlTest.new TreeNode(11);
+		node1Right.left =node3Left;
+		node1Right.right = node3Right;
+		
+
+		ArrayList<Integer> printFromTopToBottom = urlTest.PrintFromTopToBottom(node1);
+		System.out.println(printFromTopToBottom.toString());
+	}
+
+	public class TreeNode {
+		int val = 0;
+		TreeNode left = null;
+		TreeNode right = null;
+
+		public TreeNode(int val) {
+			this.val = val;
+
+		}
+
+		@Override
+		public String toString() {
+			return "TreeNode [val=" + val + ", left=" + left + ", right=" + right + "]";
+		}
+		
+		
+
+	}
+
+	public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if (root == null) {
+			return result;
+		}
+
+		Queue<TreeNode> q = new LinkedList<TreeNode>();
+
+		q.add(root);
+		while (!q.isEmpty()) {
+			TreeNode tmp = q.remove();
+			result.add(tmp.val);
+			if (tmp.left != null) {
+				q.add(tmp.left);
+			}
+
+			if (tmp.right != null) {
+				q.add(tmp.right);
+
+			}
+
+		}
+
+		return result;
+	}
+
+}
+
+
+```
+
+
+- 举一反三
+
+不管是广度优先遍历一个有向图还是一棵树,都要用到队列.
+第一步我们把起始结点(对树而言是根结点)放入队列中.接下来每一次从队列的头部去除一个结点,遍历这个结点之后把从它能到达的结点(对树而言是子节点)都依次放入队列.我们重复遍历过程,直到队列中的结点全部被遍历为止.
+
+
+
+
 ### 4.13.8. 连续子数组的最大和
 
 
