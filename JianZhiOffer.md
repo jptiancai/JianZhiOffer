@@ -2277,8 +2277,91 @@ public class UrlTest {
 
 ```java
 
+package com.imop.lj.test.battle;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+/**
+ * Created by xiaohouzi on 17/6/30.
+ */
+public class UrlTest {
+
+	public void findPath(BinaryTreeNode root,int k){
+		if(root == null)
+			return;
+		Stack<Integer> stack = new Stack<Integer>();
+		findPath(root,k,stack);
+	}
+	public void findPath(BinaryTreeNode root,int k,Stack<Integer> path){
+		if(root == null)
+			return;
+		if(root.leftNode == null && root.rightNode == null){
+			if(root.value == k){
+				System.out.println("\n路径开始");
+				for(int i :path)
+					System.out.print(i+",");
+				System.out.print(root.value);
+			}
+		}
+		else{
+			path.push(root.value);
+			findPath(root.leftNode,k-root.value,path);
+			findPath(root.rightNode,k-root.value,path);
+			path.pop();
+		}
+	}
+	public static void main(String[] args){
+		UrlTest urlTest = new UrlTest();
+		BinaryTreeNode root1 = urlTest.new BinaryTreeNode();
+		BinaryTreeNode node1 = urlTest.new BinaryTreeNode();
+		BinaryTreeNode node2 = urlTest.new BinaryTreeNode();
+		BinaryTreeNode node3 = urlTest.new BinaryTreeNode();
+		BinaryTreeNode node4 = urlTest.new BinaryTreeNode();
+		BinaryTreeNode node5 = urlTest.new BinaryTreeNode();
+		BinaryTreeNode node6 = urlTest.new BinaryTreeNode();
+		root1.leftNode = node1;
+		root1.rightNode = node2;
+		node1.leftNode = node3;
+		node1.rightNode = node4;
+		node4.leftNode = node5;
+		node4.rightNode = node6;
+		root1.value = 8;
+		node1.value = 8;
+		node2.value = 7;
+		node3.value = 9;
+		node4.value = 2;
+		node5.value = 4;
+		node6.value = 7;
+		UrlTest test = new UrlTest();
+		test.findPath(root1, 25);
+	}
+	
+	class BinaryTreeNode{
+	    int value;
+	    BinaryTreeNode leftNode;
+	    BinaryTreeNode rightNode;
+	    
+	    
+	    public BinaryTreeNode() {
+			
+		}
+
+
+		public BinaryTreeNode(int x){
+		    	value = x;
+		    	leftNode = null;
+		    	rightNode = null;
+	    }
+	}
+
+}
 
 ```
+
 
 
 
